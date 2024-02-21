@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build nginx/custom') {
             steps {
-                sh 'docker build -t nginx/custom:latest'
+                sh 'sudo docker build -t nginx/custom:latest'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Deploy nginx/custom'){
             steps{
-                sh "docker run -d --name nginx/custom -p 80:80 nginx/custom:latest"
+                sh "sudo docker run -d --name nginx/custom -p 80:80 nginx/custom:latest"
             }
         }
     }
