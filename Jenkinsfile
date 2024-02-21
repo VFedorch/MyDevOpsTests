@@ -22,7 +22,7 @@ pipeline {
 
         stage('Deploy nginx/custom'){
             steps{
-                sh "docker run -d --name nginx/custom -p 80:80 nginx/custom:latest"
+                sh "docker run -d -p 80:80 nginx/custom:latest"
             }
         }
     }
