@@ -1,14 +1,3 @@
-pipeline {
-    agent { dockerfile true }
-
-    stages {
-        stage('Build Nginx:custom docker image') {
-            steps {
-                echo 'Lab_1: Hello World'
-            }
-        }
-    }
-}
 node {
     def app
 
