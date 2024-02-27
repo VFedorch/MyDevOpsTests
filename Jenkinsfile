@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Start') {
             steps {
-                echo 'Lab_1: nginx/custom'
+                echo 'Lab_2: started by GitHub'
             }
         }
 
