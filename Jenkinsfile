@@ -10,7 +10,7 @@ pipeline {
 
         stage('Image build') {
             steps {
-                sh "docker build -t vfedorch/prikm:latest ."
+                sh "docker build -t prikm:latest ."
                 sh "docker tag prikm vfedorch/prikm:latest"
                 sh "docker tag prikm vfedorch/prikm:$BUILD_NUMBER"
             }
