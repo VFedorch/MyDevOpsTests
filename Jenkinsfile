@@ -25,12 +25,6 @@ pipeline {
             }
         }
 
-        // stage('Cleaning Up') {
-        //         steps{
-        //           sh "docker rmi --force vfedorch/prikm:$BUILD_NUMBER"
-        //         }
-        //     }
-
         stage('Deploy image'){
             steps{
                 sh "docker run -d -p 80:80 vfedorch/prikm"
