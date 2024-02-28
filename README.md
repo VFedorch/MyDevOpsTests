@@ -1,1 +1,1 @@
-# MyDevOpsTests Lab_2
+# MyDevOpsTests
