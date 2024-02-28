@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment{
+        
+        registry = "vfedorch/prikm"
+        registryCredential = 'dockerhub_token'        
+    }
+
     stages {
         stage('Start') {
             steps {
@@ -8,22 +14,34 @@ pipeline {
             }
         }
 
-        stage('Build nginx/custom') {
+        stage('Image build') {
             steps {
-                sh 'docker build -t nginx/custom:latest .'
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    }
             }
         }
 
-        stage('Test nginx/custom') {
+        stage('Push to registry') {
             steps {
-                echo 'Pass'
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
 
-        stage('Deploy nginx/custom'){
-            steps{
-                sh "docker run -d -p 80:80 nginx/custom:latest"
+        stage('Cleaning Up') {
+                steps{
+                  sh "docker rmi --force $registry:$BUILD_NUMBER"
+                }
             }
-        }
+
+        // stage('Deploy image'){
+        //     steps{
+        //         sh "docker run -d -p 80:80 nginx/custom:latest"
+        //     }
+        // }
     }
 }
